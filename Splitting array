@@ -1,0 +1,66 @@
+#include<bits/stdc++.h>
+#include<set>
+#define lli long long int
+#define pb push_back
+#define rep(i,a,n) for(lli i=a;i<n;i++)
+#define all(v) (v.begin(),v.end())
+#define ppb pop_back
+#define sz(v) v.size()
+#define pi 3.141592653589793238
+#define fr first;
+#define sc second
+#define ins insert
+using namespace std;
+lli a[200005],sum=0,mx=0;
+lli t,n,k;
+
+bool isgood(lli x){
+	lli p=0,s=0;
+	rep(i,0,n){
+		s+=a[i];
+		if(s>x){
+		s=a[i];
+		p++;
+			
+		}
+	}
+	if(s>0)
+	{
+		p++;
+	}
+	
+	
+	if(p<=k ) return true;
+	return false;
+	
+}
+int main()
+{
+
+	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);	
+	cin>>n>>k;
+	
+	rep(i,0,n){
+		cin>>a[i];
+		sum+=a[i];
+		mx=max(mx,a[i]);
+	}
+	
+	lli l=mx,r=sum;
+	
+	while(r>l+1){
+		lli mid;
+		mid=(l+r)/2;
+		
+		//cout<<mid<<endl;
+		if(isgood(mid)) r=mid;
+		else l=mid;
+	}
+	if(isgood(l))
+	cout<<l;
+	else
+	cout<<r;
+	
+	
+	return 0;
+}
